@@ -1,6 +1,3 @@
-package es1;
-
-import static java.lang.Math.sqrt;
 
 public class Point {
     private float x;
