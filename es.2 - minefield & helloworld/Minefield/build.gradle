@@ -1,0 +1,31 @@
+plugins {
+    id "org.openjfx.javafxplugin" version "0.0.8"
+    id "application"
+}
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = '13'
+    modules = [ 'javafx.controls']
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+
+}
+
+mainClassName = 'ca.mcgill.cs.swevo.minesweeper.Minesweeper'
+
+test {
+    testLogging {
+        events 'PASSED', 'FAILED'
+    }
+}
+
+javadoc {
+    options.tags = ['pre:a:Preconditions:', 'post:a:Postconditions:']
+    options.addStringOption('Xdoclint:none','-quiet')
+}

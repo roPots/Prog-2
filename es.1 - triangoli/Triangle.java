@@ -13,8 +13,8 @@ public class Triangle {
         for (int i=0;i<3;i++) {
             System.out.println("Point " + (i+1) + ": ");
             try {
-                float x = in.nextFloat();
-                float y = in.nextFloat();
+                double x = in.nextDouble();
+                double y = in.nextDouble();
                 points[i] = new Point(x,y);
             } catch (InputMismatchException e){
                 System.err.println(e.toString());
@@ -51,26 +51,26 @@ public class Triangle {
     }
 
     private boolean isTriangle(Point a, Point b, Point c) {
-        float ab = Point.distanceBetween(a,b);
-        float bc = Point.distanceBetween(b,c);
-        float ca = Point.distanceBetween(c,a);
+        double ab = Point.distanceBetween(a,b);
+        double bc = Point.distanceBetween(b,c);
+        double ca = Point.distanceBetween(c,a);
         return (ab<(bc+ca)&&bc<(ab+ca)&&ca<(ab+bc));
     }
 
-    public float[] sidesLen() {
-        float[] ret = new float[3];
+    public double[] sidesLen() {
+        double[] ret = new double[3];
         ret[0] = Point.distanceBetween(this.a,this.b);
         ret[1] = Point.distanceBetween(this.b,this.c);
         ret[2] = Point.distanceBetween(this.c,this.a);
         return ret;
     }
 
-    private static boolean sidesAreEqual(float s1,float s2) {
+    private static boolean sidesAreEqual(double s1,double s2) {
         return Math.abs(s1-s2) < 1e-6;
     }
 
     public int type() {
-        float[] sides = this.sidesLen();
+        double[] sides = this.sidesLen();
 
         int ret = 0;
 
