@@ -19,9 +19,14 @@ dell'applicazione e svolgere i seguenti esercizi.
   
 ### Analizzare gli oggetti in gioco
 
-- Quanti oggetti `Cell` vengono istanziati?
+- Quanti oggetti `Cell` vengono istanziati? 8x20 (rows x columns)
 - Quanti oggetti `Position` vengono istanziati? Come si può fare per contarli
   esattamente?
+  8x20 (rows x columns)
+  + ogni volta che viene chiamata la funzione getNeighbours(Position),
+  vengono istanziate tante Position quanti sono i vicini della posizione della casella in argomento.
+  quindi da 3 a 8 Position.
+  
 - Quali Responsabilità e Collaborazioni gestisce `Cell`?
 - Quali Responsabilità e Collaborazioni gestisce `Position`?
 - Quali Responsabilità e Collaborazioni gestisce `Minefield`?

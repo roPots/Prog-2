@@ -100,12 +100,12 @@ public class Minesweeper extends Application
     	{
     		aGrid.add(createTile(position), position.getColumn(), position.getRow());
     	}
-    	MinefieldStatus status = aMinefield.getStatus();
-    	if( status == MinefieldStatus.CLEARED )
+    	Minefield.MinefieldStatus status = aMinefield.getStatus();
+    	if( status == Minefield.MinefieldStatus.CLEARED )
     	{
     		aStatusBar.setText("You won! Press Enter to play again");
     	}
-    	else if( status == MinefieldStatus.EXPLODED )
+    	else if( status == Minefield.MinefieldStatus.EXPLODED )
     	{
     		aStatusBar.setText("You lost. Press Enter to try again");
     	}
@@ -134,11 +134,12 @@ public class Minesweeper extends Application
 			@Override
 			public void handle(final KeyEvent pEvent)
 			{
-				if( pEvent.getCode() == KeyCode.ENTER)
+				if( pEvent.getCode() == KeyCode.ENTER || pEvent.getCode() == KeyCode.R)
 				{
 					newGame();
 					refresh();
 				}
+				// else if ( pEvent.getCode() == KeyCode.S ) aMinefield.revealAll();
 				pEvent.consume();
 			}
 		});
@@ -168,6 +169,7 @@ public class Minesweeper extends Application
 		if( aMinefield.isMarked(pPosition))
 		{
 			button.setText("!");
+			button.setStyle("-fx-background-color: #ffff00; ");
 		}
 		button.setOnMouseClicked( e-> 
 		{
