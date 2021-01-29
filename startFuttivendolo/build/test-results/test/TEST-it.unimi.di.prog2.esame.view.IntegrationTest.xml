@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="it.unimi.di.prog2.esame.view.IntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-01-28T15:30:45" hostname="BUDTEK" time="3.511">
+  <properties/>
+  <testcase name="integrationTest" classname="it.unimi.di.prog2.esame.view.IntegrationTest" time="3.511"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

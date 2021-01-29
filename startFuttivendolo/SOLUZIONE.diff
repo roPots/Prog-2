@@ -1,0 +1,166 @@
+diff --git a/src/main/java/it/unimi/di/prog2/esame/controller/Controller.java b/src/main/java/it/unimi/di/prog2/esame/controller/Controller.java
+index b828221..ac8adef 100644
+--- a/src/main/java/it/unimi/di/prog2/esame/controller/Controller.java
++++ b/src/main/java/it/unimi/di/prog2/esame/controller/Controller.java
+@@ -2,13 +2,10 @@ package it.unimi.di.prog2.esame.controller;
+ 
+ import it.unimi.di.prog2.esame.model.Ticket;
+ import it.unimi.di.prog2.esame.model.TicketModel;
+-
+ import it.unimi.di.prog2.esame.observer.Observer;
+ import it.unimi.di.prog2.esame.observer.Subject;
+-
+ import it.unimi.di.prog2.esame.view.RoleStrategy;
+ import it.unimi.di.prog2.esame.view.TicketView;
+-
+ import javafx.event.ActionEvent;
+ import javafx.event.EventHandler;
+ 
+@@ -25,6 +22,14 @@ public class Controller implements EventHandler<ActionEvent>, Observer<Ticket> {
+     v.addHandler(this);
+   }
+ 
+-  //TODO realizzare i metodi mancanti per soddisfare le interfacce implementate
++  @Override // MODEL -> VIEW
++  public void update(Subject<Ticket> model) {
++    view.set(Integer.toString(role.getNumber(model)));
++  }
++
++  @Override  // VIEW -> MODEL
++  public void handle(ActionEvent event) {
++    role.incNumber(model);
++  }
+ 
+ }
+\ No newline at end of file
+diff --git a/src/main/java/it/unimi/di/prog2/esame/model/Ticket.java b/src/main/java/it/unimi/di/prog2/esame/model/Ticket.java
+index ed97a8d..0ab24a6 100644
+--- a/src/main/java/it/unimi/di/prog2/esame/model/Ticket.java
++++ b/src/main/java/it/unimi/di/prog2/esame/model/Ticket.java
+@@ -1,7 +1,6 @@
+ package it.unimi.di.prog2.esame.model;
+ 
+ public class Ticket {
+-  //TODO: dire se questa classe è immutabile e perché
+   private final int last;
+   private final int next;
+ 
+@@ -18,9 +17,4 @@ public class Ticket {
+     return next;
+   }
+ 
+- //TODO: se fosse necessario confrontare due Ticket, quale approccio sarebbe corretto (spiegando il perché):
+-  // - usare operatore ==
+-  // - usare metodo equals
+-  // - usare metodo equals dopo averlo ridefinito
+-
+ }
+diff --git a/src/main/java/it/unimi/di/prog2/esame/model/TicketModel.java b/src/main/java/it/unimi/di/prog2/esame/model/TicketModel.java
+index c5a20c4..5539837 100644
+--- a/src/main/java/it/unimi/di/prog2/esame/model/TicketModel.java
++++ b/src/main/java/it/unimi/di/prog2/esame/model/TicketModel.java
+@@ -7,18 +7,21 @@ import java.util.ArrayList;
+ import java.util.List;
+ 
+ public class TicketModel implements Subject<Ticket> {
++  private final List<Observer<Ticket>> observers = new ArrayList<>();
+   private int last = 0;
+   private int next = 0;
+-  private final List<Observer<Ticket>> observers = new ArrayList<>();
+-
+ 
+   public void serveNext() {
+-   //TODO: implementare opportunamente il metodo
++    if (next < last) {
++      next++;
++      notifyObservers();
++    }
+ 
+   }
+ 
+   public void getTicket() {
+-    //TODO: implementare opportunamente il metodo
++    last++;
++    notifyObservers();
+ 
+   }
+ 
+@@ -28,7 +31,7 @@ public class TicketModel implements Subject<Ticket> {
+   }
+ 
+ 
+-  //TODO parlando del pattern Observer dire se stiamo usando modalità push o pull
++
+   @Override
+   public void notifyObservers() {
+     for (Observer<Ticket> observer : observers) {
+diff --git a/src/main/java/it/unimi/di/prog2/esame/view/ClerkRole.java b/src/main/java/it/unimi/di/prog2/esame/view/ClerkRole.java
+index 3a8faba..83cf2e1 100644
+--- a/src/main/java/it/unimi/di/prog2/esame/view/ClerkRole.java
++++ b/src/main/java/it/unimi/di/prog2/esame/view/ClerkRole.java
+@@ -7,6 +7,13 @@ import it.unimi.di.prog2.esame.observer.Subject;
+ public enum ClerkRole implements RoleStrategy {
+   INSTANCE;
+ 
+-  //TODO realizzare i metodi mancanti per soddisfare le interfacce implementate
++  @Override
++  public void incNumber(TicketModel m) {
++    m.serveNext();
++  }
+ 
++  @Override
++  public int getNumber(Subject<Ticket> m) {
++    return m.getState().getNextToServe();
++  }
+ }
+diff --git a/src/main/java/it/unimi/di/prog2/esame/view/CustomerRole.java b/src/main/java/it/unimi/di/prog2/esame/view/CustomerRole.java
+index d82920f..5c6b9de 100644
+--- a/src/main/java/it/unimi/di/prog2/esame/view/CustomerRole.java
++++ b/src/main/java/it/unimi/di/prog2/esame/view/CustomerRole.java
+@@ -5,7 +5,6 @@ import it.unimi.di.prog2.esame.model.Ticket;
+ import it.unimi.di.prog2.esame.observer.Subject;
+ 
+ public enum CustomerRole implements RoleStrategy {
+-  //TODO a quale pattern vi fa pensare la riga successiva? Spiegarlo.
+   INSTANCE;
+ 
+   @Override
+diff --git a/src/main/java/it/unimi/di/prog2/esame/view/DisplayView.java b/src/main/java/it/unimi/di/prog2/esame/view/DisplayView.java
+index 7f2506d..8287a64 100644
+--- a/src/main/java/it/unimi/di/prog2/esame/view/DisplayView.java
++++ b/src/main/java/it/unimi/di/prog2/esame/view/DisplayView.java
+@@ -10,14 +10,13 @@ import javafx.scene.text.Font;
+ 
+ 
+ public class DisplayView extends Region implements TicketView {
+-  //TODO: dire se questa classe è immutabile e perché
+   final Label numero = new Label();
+   final Button bottone = new Button();
+ 
+-  public DisplayView(String s) {
++  public DisplayView(String idString) {
+     numero.setText("0");
+-    bottone.setText(s);
+-    setId(s);
++    bottone.setText(idString);
++    setId(idString);
+ 
+     setBackground(new Background(
+             new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(5.0), Insets.EMPTY)));
+@@ -31,6 +30,15 @@ public class DisplayView extends Region implements TicketView {
+     this.getChildren().add(grid);
+   }
+ 
+-  //TODO realizzare i metodi mancanti per soddisfare le interfacce implementate
++  @Override
++  public void addHandler(Controller handler) {
++    bottone.setOnAction(handler);
++  }
++
++  @Override
++  public void set(String s) {
++    numero.setText(s);
++  }
++
+ 
+ }

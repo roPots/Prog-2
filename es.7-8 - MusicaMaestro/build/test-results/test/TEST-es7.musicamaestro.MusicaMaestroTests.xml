@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="es7.musicamaestro.MusicaMaestroTests" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-01-15T09:08:14" hostname="BUDTEK" time="0.01">
+  <properties/>
+  <testcase name="step1Test" classname="es7.musicamaestro.MusicaMaestroTests" time="0.002"/>
+  <testcase name="step2Test" classname="es7.musicamaestro.MusicaMaestroTests" time="0.001"/>
+  <testcase name="step3Test" classname="es7.musicamaestro.MusicaMaestroTests" time="0.003"/>
+  <testcase name="step4Test" classname="es7.musicamaestro.MusicaMaestroTests" time="0.001"/>
+  <testcase name="step5Test" classname="es7.musicamaestro.MusicaMaestroTests" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

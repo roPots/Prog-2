@@ -1,79 +1,122 @@
 package es3;
 
-public class StraightFlushEvaluator implements ChainedHandEvaluator<PokerHand> {
-    private PokerHand hand;
+import ca.mcgill.cs.stg.solitaire.cards.Card;
+import ca.mcgill.cs.stg.solitaire.cards.Rank;
+import ca.mcgill.cs.stg.solitaire.cards.Suit;
 
-    public StraightFlushEvaluator(PokerHand hand) {
-        this.hand = hand;
+public class StraightFlushEvaluator implements ChainedHandEvaluator {
+
+    private final ChainedHandEvaluator next;
+
+    public StraightFlushEvaluator(ChainedHandEvaluator next) {
+        this.next = next;
     }
 
     @Override
-    public int evaluate() {
-        hand.sort();
-
-        for (int i=0;i<4;i++) {
-            if (!hand.at(i).getSuit().equals(hand.at(i+1).getSuit()) || (hand.at(i+1).getRank().ordinal()!=hand.at(i).getRank().ordinal()+1)) return nexteval(); // suit is different OR next rank is not this rank +1
-        }
-        return 1;
-    }
-
-    private int nexteval() {
-        FourOfAKindEvaluator nexteval = new FourOfAKindEvaluator(hand);
-        return nexteval.evaluate();
+    public HandRank evaluate(PokerHand hand) {
+        if (hand.isStraight() && hand.isFlush()) return HandRank.STRAIGHT_FLUSH;
+        else return next.evaluate(hand);
     }
 }
 
-class FourOfAKindEvaluator implements ChainedHandEvaluator<PokerHand> {
+class FourOfAKindEvaluator implements ChainedHandEvaluator {
 
-    private PokerHand hand;
+    private final ChainedHandEvaluator next;
 
-    public FourOfAKindEvaluator(PokerHand hand) {
-        this.hand = hand;
+    public FourOfAKindEvaluator(ChainedHandEvaluator next) {
+        this.next = next;
     }
 
     @Override
-    public int evaluate() {
-        hand.sortRankFirst();
-        int eq = 0;
-        boolean differed = false;
-
-        for (int i=0;i<4;i++) {
-            if (hand.at(i).getRank().equals(hand.at(i+1).getRank())) eq++;
-            else if (i!=0) differed = true;
-        }
-        if (eq==3 && !differed) return 2;
-        else return nexteval();
-    }
-
-    private int nexteval() {
-        FullHouseEvaluator nexteval = new FullHouseEvaluator(hand);
-        return nexteval.evaluate();
+    public HandRank evaluate(PokerHand hand) {
+        if (hand.xOfAKind(4)!=null) return HandRank.FOUR_OF_A_KIND;
+        return next.evaluate(hand);
     }
 }
 
-class FullHouseEvaluator implements ChainedHandEvaluator<PokerHand> {
+class FullHouseEvaluator implements ChainedHandEvaluator {
 
-    private PokerHand hand;
+    private final ChainedHandEvaluator next;
 
-    public FullHouseEvaluator(PokerHand hand) {
-        this.hand = hand;
+    public FullHouseEvaluator(ChainedHandEvaluator next) {
+        this.next = next;
     }
 
     @Override
-    public int evaluate() {
-        hand.sortRankFirst();
+    public HandRank evaluate(PokerHand hand) {
+        if (hand.xOfAKind(3)!=null && hand.xOfAKind(2)!=null) return HandRank.FULL_HOUSE;
+        return next.evaluate(hand);
+    }
+}
 
-        int eq = 0;
+class FlushEvaluator implements ChainedHandEvaluator {
 
-        for (int i=0; i<4; i++) {
-            if (hand.at(i).getRank().equals(hand.at(i+1).getRank())) eq++;
-        }
+    private final ChainedHandEvaluator next;
 
-        if (eq==3) return 3;
-        else return nexteval();
+    public FlushEvaluator (ChainedHandEvaluator next) { this.next = next; }
+
+    @Override
+    public HandRank evaluate(PokerHand hand) {
+        if (hand.isFlush()) return HandRank.FLUSH;
+        return next.evaluate(hand);
+    }
+}
+
+class StraightEvaluator implements ChainedHandEvaluator {
+
+    private final ChainedHandEvaluator next;
+
+    public StraightEvaluator (ChainedHandEvaluator next) { this.next = next; }
+
+    @Override
+    public HandRank evaluate(PokerHand hand) {
+        if (hand.isStraight()) return HandRank.STRAIGHT;
+        return next.evaluate(hand);
+    }
+}
+
+class ThreeOfAKindEvaluator implements ChainedHandEvaluator {
+
+    private final ChainedHandEvaluator next;
+
+    public ThreeOfAKindEvaluator(ChainedHandEvaluator next) {
+        this.next = next;
     }
 
-    private int nexteval() {
-        return 0;
+    @Override
+    public HandRank evaluate(PokerHand hand) {
+        if (hand.xOfAKind(3)!=null) return HandRank.THREE_OF_A_KIND;
+        return next.evaluate(hand);
+    }
+}
+
+class TwoPairEvaluator implements ChainedHandEvaluator {
+
+    private final ChainedHandEvaluator next;
+
+    public TwoPairEvaluator(ChainedHandEvaluator next) {
+        this.next = next;
+    }
+
+    @Override
+    public HandRank evaluate(PokerHand hand) {
+        hand.sortBy(PokerHand.RANK_COMPARATOR);
+
+        Rank rank1 = hand.xOfAKind(2);
+        if (rank1!=null) {
+            hand.sortBy(PokerHand.RANK_COMPARATOR.reversed());
+            Rank rank2 = hand.xOfAKind(2);
+            if (rank2!=null && rank2!=rank1) {
+                return HandRank.TWO_PAIR;
+            } else return HandRank.ONE_PAIR;
+        }
+        return next.evaluate(hand);
+    }
+}
+
+class HighCardEvaluator implements ChainedHandEvaluator {
+    @Override
+    public HandRank evaluate(PokerHand hand) {
+        return HandRank.HIGH_CARD;
     }
 }

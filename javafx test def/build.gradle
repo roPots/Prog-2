@@ -1,0 +1,20 @@
+plugins {
+    id "org.openjfx.javafxplugin" version "0.0.8"
+    id "application"
+}
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = '13'
+    modules = [ 'javafx.controls']
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+
+}
+
+mainClassName = 'funtimeswithjfx.Main'
