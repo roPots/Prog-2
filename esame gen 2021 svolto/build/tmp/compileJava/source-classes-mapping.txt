@@ -1,0 +1,30 @@
+it/unimi/di/prog2/esame/view/TicketView.java
+ it.unimi.di.prog2.esame.view.TicketView
+it/unimi/di/prog2/esame/presenter/Sportello.java
+ it.unimi.di.prog2.esame.presenter.Sportello
+it/unimi/di/prog2/esame/presenter/Presenter.java
+ it.unimi.di.prog2.esame.presenter.Presenter
+it/unimi/di/prog2/esame/presenter/ConcretePresenter.java
+ it.unimi.di.prog2.esame.presenter.ConcretePresenter
+it/unimi/di/prog2/esame/presenter/GeneralDisplay.java
+ it.unimi.di.prog2.esame.presenter.GeneralDisplay
+it/unimi/di/prog2/esame/Main.java
+ it.unimi.di.prog2.esame.Main
+it/unimi/di/prog2/esame/view/GeneralDisplayView.java
+ it.unimi.di.prog2.esame.view.GeneralDisplayView
+it/unimi/di/prog2/esame/presenter/Role.java
+ it.unimi.di.prog2.esame.presenter.Role
+it/unimi/di/prog2/esame/model/Model.java
+ it.unimi.di.prog2.esame.model.Model
+it/unimi/di/prog2/esame/view/DispenserView.java
+ it.unimi.di.prog2.esame.view.DispenserView
+it/unimi/di/prog2/esame/model/Observer.java
+ it.unimi.di.prog2.esame.model.Observer
+it/unimi/di/prog2/esame/model/Subject.java
+ it.unimi.di.prog2.esame.model.Subject
+it/unimi/di/prog2/esame/presenter/Dispenser.java
+ it.unimi.di.prog2.esame.presenter.Dispenser
+it/unimi/di/prog2/esame/model/Ticket.java
+ it.unimi.di.prog2.esame.model.Ticket
+it/unimi/di/prog2/esame/view/SportelloView.java
+ it.unimi.di.prog2.esame.view.SportelloView
