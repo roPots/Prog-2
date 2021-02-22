@@ -1,0 +1,2 @@
+it/unimi/di/prog2/esame/view/IntegrationTest.java
+ it.unimi.di.prog2.esame.view.IntegrationTest

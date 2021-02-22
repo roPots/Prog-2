@@ -1,0 +1,24 @@
+it/unimi/di/prog2/esame/model/Ticket.java
+ it.unimi.di.prog2.esame.model.Ticket
+it/unimi/di/prog2/esame/observer/Observer.java
+ it.unimi.di.prog2.esame.observer.Observer
+it/unimi/di/prog2/esame/model/TicketModel.java
+ it.unimi.di.prog2.esame.model.TicketModel
+it/unimi/di/prog2/esame/view/CustomerRole.java
+ it.unimi.di.prog2.esame.view.CustomerRole
+it/unimi/di/prog2/esame/view/RoleStrategy.java
+ it.unimi.di.prog2.esame.view.RoleStrategy
+it/unimi/di/prog2/esame/view/ClerkRole.java
+ it.unimi.di.prog2.esame.view.ClerkRole
+it/unimi/di/prog2/esame/observer/Subject.java
+ it.unimi.di.prog2.esame.observer.Subject
+it/unimi/di/prog2/esame/controller/Controller.java
+ it.unimi.di.prog2.esame.controller.Controller
+it/unimi/di/prog2/esame/view/TicketView.java
+ it.unimi.di.prog2.esame.view.TicketView
+it/unimi/di/prog2/esame/Main.java
+ it.unimi.di.prog2.esame.Main
+it/unimi/di/prog2/esame/view/DisplayView.java
+ it.unimi.di.prog2.esame.view.DisplayView
+it/unimi/di/prog2/esame/view/TicketViewOld.java
+ it.unimi.di.prog2.esame.view.TicketViewOld

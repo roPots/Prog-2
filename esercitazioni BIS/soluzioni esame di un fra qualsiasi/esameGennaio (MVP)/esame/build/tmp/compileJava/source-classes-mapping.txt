@@ -1,0 +1,30 @@
+it/unimi/di/prog2/esame/observer/Observer.java
+ it.unimi.di.prog2.esame.observer.Observer
+it/unimi/di/prog2/esame/observer/Subject.java
+ it.unimi.di.prog2.esame.observer.Subject
+it/unimi/di/prog2/esame/model/Ticket.java
+ it.unimi.di.prog2.esame.model.Ticket
+it/unimi/di/prog2/esame/model/Call.java
+ it.unimi.di.prog2.esame.model.Call
+it/unimi/di/prog2/esame/model/TicketModel.java
+ it.unimi.di.prog2.esame.model.TicketModel
+it/unimi/di/prog2/esame/view/TicketView.java
+ it.unimi.di.prog2.esame.view.TicketView
+it/unimi/di/prog2/esame/view/FrontOfficeView.java
+ it.unimi.di.prog2.esame.view.FrontOfficeView
+it/unimi/di/prog2/esame/presenter/Presenter.java
+ it.unimi.di.prog2.esame.presenter.Presenter
+it/unimi/di/prog2/esame/view/RoleStrategy.java
+ it.unimi.di.prog2.esame.view.RoleStrategy
+it/unimi/di/prog2/esame/view/DisplayStrategy.java
+ it.unimi.di.prog2.esame.view.DisplayStrategy
+it/unimi/di/prog2/esame/view/PatientStrategy.java
+ it.unimi.di.prog2.esame.view.PatientStrategy
+it/unimi/di/prog2/esame/view/OfficeStrategy.java
+ it.unimi.di.prog2.esame.view.OfficeStrategy
+it/unimi/di/prog2/esame/Main.java
+ it.unimi.di.prog2.esame.Main
+it/unimi/di/prog2/esame/view/GetTicketView.java
+ it.unimi.di.prog2.esame.view.GetTicketView
+it/unimi/di/prog2/esame/view/GeneralDisplayView.java
+ it.unimi.di.prog2.esame.view.GeneralDisplayView
