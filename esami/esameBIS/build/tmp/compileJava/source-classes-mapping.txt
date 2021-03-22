@@ -1,0 +1,24 @@
+it/unimi/di/prog2/esame/observer/Subject.java
+ it.unimi.di.prog2.esame.observer.Subject
+it/unimi/di/prog2/esame/observer/Observer.java
+ it.unimi.di.prog2.esame.observer.Observer
+it/unimi/di/prog2/esame/model/AbstractModel.java
+ it.unimi.di.prog2.esame.model.AbstractModel
+it/unimi/di/prog2/esame/presenter/GeneralDisplayPresenter.java
+ it.unimi.di.prog2.esame.presenter.GeneralDisplayPresenter
+it/unimi/di/prog2/esame/view/PersonalView.java
+ it.unimi.di.prog2.esame.view.PersonalView
+it/unimi/di/prog2/esame/model/Question.java
+ it.unimi.di.prog2.esame.model.Question
+it/unimi/di/prog2/esame/view/View.java
+ it.unimi.di.prog2.esame.view.View
+it/unimi/di/prog2/esame/Main.java
+ it.unimi.di.prog2.esame.Main
+it/unimi/di/prog2/esame/presenter/AbstractPresenter.java
+ it.unimi.di.prog2.esame.presenter.AbstractPresenter
+it/unimi/di/prog2/esame/model/QuestionModel.java
+ it.unimi.di.prog2.esame.model.QuestionModel
+it/unimi/di/prog2/esame/view/GeneralDisplayView.java
+ it.unimi.di.prog2.esame.view.GeneralDisplayView
+it/unimi/di/prog2/esame/presenter/PersonalViewPresenter.java
+ it.unimi.di.prog2.esame.presenter.PersonalViewPresenter
